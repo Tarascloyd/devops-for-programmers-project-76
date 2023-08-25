@@ -20,3 +20,4 @@
 
   roles:
     - role: geerlingguy.pip
+    - role: datadog.datadog
