@@ -1,0 +1,11 @@
+- hosts: all
+
+- name: prepare servers
+  tags:
+    - prepare
+  ansible.builtin.import_playbook: prepare.yml
+
+- name: deploy project
+  tags:
+    - deploy
+  ansible.builtin.import_playbook: deploy.yml
