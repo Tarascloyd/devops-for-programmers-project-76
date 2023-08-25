@@ -20,4 +20,8 @@
 
   roles:
     - role: geerlingguy.pip
+
+- hosts: webservers
+  roles:
     - role: datadog.datadog
+      become: yes
