@@ -1,7 +1,25 @@
-- hosts: all
+- name: Setup all servers
+  hosts: all
+  become: yes
+  
+  tasks:
+    - name: add Docker GPG apt key
+      ansible.builtin.apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      ansible.builtin.apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        state: present
+
+    - name: Update apt and install docker-ce
+      ansible.builtin.apt:
+        name: docker-ce
+        update_cache: true
+
   roles:
     - role: geerlingguy.pip
-      become: true
       vars:
         pip_install_packages:
-          - name: docker
+          - docker

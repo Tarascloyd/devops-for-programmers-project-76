@@ -3,14 +3,15 @@
     - name: provide env
       ansible.builtin.template:
         src: .env.j2
-        dest: .env
+        dest: /tmp/.env
         mode: '0644'
 
     - name: start redmine
       community.docker.docker_container:
-        name: redmine
-        image: "redmine:latest"
+        name: redmine-app
+        image: redmine
         restart_policy: always
         state: started
-        env_file: .env
+        env_file: /tmp/.env
         ports: "80:3000"
+      become: yes
